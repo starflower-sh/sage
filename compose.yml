@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: ghcr.io/starflower-sh/sage-postgres:18
+    container_name: sage-postgres
+    environment:
+      POSTGRES_USER: local
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - sage_pg_data:/var/lib/pg-sage/data
+    restart: unless-stopped
+
+volumes:
+  sage_pg_data:
