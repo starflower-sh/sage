@@ -1,0 +1,69 @@
+default_stages:
+  - "pre-commit"
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+
+      - id: check-case-conflict
+
+      - id: check-symlinks
+
+      - id: end-of-file-fixer
+        exclude: >
+          (?x)(
+            \.npmrc$
+          )
+
+      - id: trailing-whitespace
+        exclude: >
+          (?x)(
+            /\.yarn/
+          )
+
+      - id: check-ast
+
+      - id: debug-statements
+
+      - id: check-json
+        exclude: >
+          (?x)(
+            /tsconfig.json
+          )
+
+      - id: pretty-format-json
+        args:
+          - --autofix
+          - --no-sort-keys
+        exclude: >
+          (?x)(
+            /package-lock.json
+            | /package.json
+            | /tsconfig.json
+          )
+
+      - id: check-yaml
+        args:
+          - --allow-multiple-documents
+
+      - id: detect-private-key
+
+  - repo: local
+    hooks:
+      - id: shellcheck
+        name: shellcheck
+        language: system
+        entry: shellcheck
+        args:
+          - --external-sources
+        types_or:
+          - sh
+          - shell
+          - bash
+
+  - repo: https://github.com/starflower-sh/poppy-sql
+    rev: v0.2.6
+    hooks:
+      - id: poppy-sql

@@ -1,0 +1,4 @@
+dialect = "PostgreSQL"
+
+[format]
+lines_between_queries = 2
