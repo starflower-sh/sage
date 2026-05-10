@@ -1,9 +1,8 @@
 name: sage-postgres
 
 services:
-  postgres:
+  sage-postgres:
     image: ghcr.io/starflower-sh/sage-postgres:18
-    container_name: sage-postgres
     environment:
       POSTGRES_USER: local
       POSTGRES_PASSWORD: password
