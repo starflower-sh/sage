@@ -1,0 +1,62 @@
+version: "*"
+
+config:
+  - key: shared_preload_libraries
+    value: "pg_stat_statements,auto_explain"
+  - key: pg_stat_statements.max
+    value: 10000
+  - key: pg_stat_statements.track
+    value: all
+  - key: pg_stat_statements.track_planning
+    value: on
+  - key: track_io_timing
+    value: on
+  - key: track_functions
+    value: pl
+  - key: auto_explain.min_duration
+    value: 1000
+  - key: auto_explain.log_analyze
+    value: on
+  - key: auto_explain.log_buggers
+    value: on
+  - key: auto_explain.log_wal
+    value: on
+  - key: auto_explain.log_timing
+    value: off
+  - key: auto_explain.log_nested_statements
+    value: on
+  - key: log_min_duration_statement
+    value: 1000
+  - key: log_checkpoints
+    value: on
+  - key: log_connections
+    value: on
+  - key: log_disconnections
+    value: on
+  - key: log_lock_waits
+    value: on
+  - key: log_temp_files
+    value: 0
+  - key: deadlock_timeout
+    value: 1s
+
+superuser:
+  name: postgres
+  password: postgres
+
+roles:
+  - name: user
+    password: password
+    login: true
+
+databases:
+  - name: sage_db
+    owner: user
+    schema_dump_file: ""
+    migrations_dir: ""
+    extensions:
+      - pg_stat_statements
+      - pg_buffercache
+      - pgstattuple
+      - pg_visibility
+      - pageinspect
